@@ -153,7 +153,7 @@ const ExpressionCard = (props) => {
                     <Button
                       variant="primary"
                       onClick={() => {
-                        navigate(`/edit-word/${expressionEntry.createdById}`);
+                        navigate(`/edit-expression/${expressionEntry.createdById}`);
                       }}
                     >
                       Edit Expression 

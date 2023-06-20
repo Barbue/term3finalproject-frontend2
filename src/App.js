@@ -14,6 +14,7 @@ import { GiFleurDeLys, GiTrefoilLily } from "react-icons/gi";
 import ExpressionsList from "./Pages/ExpressionsList";
 import PaginationExp from "./Components/PaginationExp";
 import ExpressionFormPage from "./Pages/ExpressionFormPage";
+import EditExpressionForm from "./Components/EditExpressionForm";
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
@@ -265,6 +266,16 @@ function App() {
             />
           }
         />
+        <Route
+            path="edit-expression/:id"
+            element={
+              <EditExpressionForm
+                urlEndPoint={urlEndPoint}
+                expressionList={expressionList}
+                setShouldRefresh={setShouldRefresh}
+              />
+            }
+          />
       </Routes>
     </div>
   );
