@@ -11,7 +11,8 @@ import { GiFleurDeLys } from "react-icons/gi";
 const ExpressionCard = (props) => {
   const navigate = useNavigate();
 
-  const { expressionEntry, urlEndPoint, setShouldRefresh, expressionList } = props;
+  const { expressionEntry, urlEndPoint, setShouldRefresh, expressionList } =
+    props;
   console.log(expressionEntry);
 
   const handleDeleteExpression = (id) => {
@@ -45,14 +46,27 @@ const ExpressionCard = (props) => {
                 style={{ width: "27rem" }}
                 className="mb-2"
               >
-                <Card.Header>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/>
+                <Card.Header style={{ color: "gold" }}>
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
                 </Card.Header>
                 <Card.Body>
                   <QuickEditExp
@@ -63,14 +77,14 @@ const ExpressionCard = (props) => {
                   />
                   <br />
 
-                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                  {/* <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
                     Theme:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
                     <small> {expressionEntry.theme} </small>{" "}
-                  </Card.Text>
+                  </Card.Text> */}
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
@@ -96,7 +110,10 @@ const ExpressionCard = (props) => {
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.metaphoricaltranslation} </small>{" "}
+                    <small>
+                      {" "}
+                      {expressionEntry.metaphoricaltranslation}{" "}
+                    </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
@@ -115,9 +132,23 @@ const ExpressionCard = (props) => {
                     {" "}
                     <small> {expressionEntry.context} </small>{" "}
                   </Card.Text>
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Created On:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {expressionEntry.createdAt} </small>{" "}
+                  </Card.Text>
 
-                  <Card.Subtitle style={{fontSize: "25px", fontWeight: 1000}}> Created By Id: </Card.Subtitle>
-      <Card.Text> <small>  {expressionEntry.createdById} </small> </Card.Text>
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Created By Id:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {expressionEntry.createdById} </small>{" "}
+                  </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
@@ -153,10 +184,12 @@ const ExpressionCard = (props) => {
                     <Button
                       variant="primary"
                       onClick={() => {
-                        navigate(`/edit-expression/${expressionEntry.createdById}`);
+                        navigate(
+                          `/edit-expression/${expressionEntry.createdById}`
+                        );
                       }}
                     >
-                      Edit Expression 
+                      Edit Expression
                     </Button>
                   </div>
                 </Card.Body>

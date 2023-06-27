@@ -45,14 +45,27 @@ const WordCard = (props) => {
                 style={{ width: "27rem" }}
                 className="mb-2"
               >
-                <Card.Header>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/>
-                  <GiFleurDeLys/><GiFleurDeLys/>
+                <Card.Header style={{ color: "gold" }}>
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
+                  <GiFleurDeLys />
                 </Card.Header>
                 <Card.Body>
                   <QuickEdit
@@ -107,9 +120,23 @@ const WordCard = (props) => {
                     {" "}
                     <small> {wordEntry.comments} </small>{" "}
                   </Card.Text>
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Created On:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {wordEntry.createdAt} </small>{" "}
+                  </Card.Text>
 
-                  {/* <Card.Subtitle style={{fontSize: "25px", fontWeight: 1000}}> CreatedById: </Card.Subtitle>
-      <Card.Text> <small>  {ticket.createdById} </small> </Card.Text> */}
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Created By Id:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {wordEntry.createdById} </small>{" "}
+                  </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
@@ -148,7 +175,7 @@ const WordCard = (props) => {
                         navigate(`/edit-word/${wordEntry.createdById}`);
                       }}
                     >
-                      Edit Word 
+                      Edit Word
                     </Button>
                   </div>
                 </Card.Body>

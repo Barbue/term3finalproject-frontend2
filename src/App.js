@@ -8,13 +8,14 @@ import WordsList from "./Pages/WordsList";
 import Pagination from "./Components/Pagination";
 import PrivatePage from "./Pages/PrivatePage";
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./Components/NavBar";
+//import NavBar from "./Components/NavBar";
 import EditWordForm from "./Components/EditWordForm";
 import { GiFleurDeLys, GiTrefoilLily } from "react-icons/gi";
 import ExpressionsList from "./Pages/ExpressionsList";
 import PaginationExp from "./Components/PaginationExp";
 import ExpressionFormPage from "./Pages/ExpressionFormPage";
 import EditExpressionForm from "./Components/EditExpressionForm";
+import NavBar2 from "./Components/NavBar2";
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
@@ -165,7 +166,7 @@ function App() {
 
   return (
     <div className="App-header ">
-      <NavBar />
+      <NavBar2 />
 
       <h2 className="header1">
         <GiTrefoilLily />

@@ -43,7 +43,7 @@ const handleUpdateExpression1 = () => {
 
     } 
     
-        const response = axios.put(`${urlEndPoint}/expressions/update-one/${expression.createdById}`, req)
+        const response = axios.put(`${urlEndPoint}/expressions/update-one/${ expressionEntry.createdById}`, req)
         .then(function (response) {
           console.log(response);
           setShouldRefresh(false);
