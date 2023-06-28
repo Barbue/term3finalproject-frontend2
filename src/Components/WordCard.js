@@ -45,7 +45,7 @@ const WordCard = (props) => {
                 style={{ width: "27rem" }}
                 className="mb-2"
               >
-                <Card.Header style={{ color: "gold" }}>
+                <Card.Header style={{ color: "goldenrod" }}>
                   <GiFleurDeLys />
                   <GiFleurDeLys />
                   <GiFleurDeLys />
@@ -168,7 +168,7 @@ const WordCard = (props) => {
                     >
                       Delete Word
                     </Button>
-
+{/* 
                     <Button
                       variant="primary"
                       onClick={() => {
@@ -176,7 +176,7 @@ const WordCard = (props) => {
                       }}
                     >
                       Edit Word
-                    </Button>
+                    </Button> */}
                   </div>
                 </Card.Body>
               </Card>

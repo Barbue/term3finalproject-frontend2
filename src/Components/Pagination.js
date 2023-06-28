@@ -19,7 +19,7 @@ const Pagination = ({totalWords, wordsPerPage, setCurrentPage, currentPage}) => 
         {
            pages.map((page, i) => {
 
-           return <Button className="pages1" variant="success"  key={i} onClick={() => { setCurrentPage(page) } }>{page}</Button> 
+           return <Button className='pagesButton'  variant="success"  key={i} onClick={() => { setCurrentPage(page) } }>{page}</Button> 
 
           }) 
         }

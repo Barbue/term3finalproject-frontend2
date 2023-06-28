@@ -65,16 +65,16 @@ function QuickEdit(props) {
       >
         Word: {wordEntry.word}
       </Card.Link>
-      <Modal
+      <Modal className="modal"
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Quick Edit</Modal.Title>
+        <Modal.Header className="modalHeader" closeButton>
+          <Modal.Title >Quick Edit</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="modalBody">
           <h1> Edit Word Entry </h1>
 
           <Form>
@@ -164,13 +164,13 @@ function QuickEdit(props) {
     </Form.Group> */}
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="modalFooter">
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
 
           <Button
-            variant="success"
+            variant="dark"
             onClick={() => {
               handleUpdateWord1();
             }}

@@ -65,16 +65,16 @@ const handleUpdateExpression1 = () => {
       <Card.Link style={{fontSize: "30px", fontWeight: 1000, color: 'blue'}} onClick={handleShow}>
       Theme: {expressionEntry.theme}
       </Card.Link>
-      <Modal 
+      <Modal className="modal"
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header  closeButton>
+        <Modal.Header className="modalHeader" closeButton>
         <Modal.Title>Quick Edit</Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body className="modalBody">
           
         <h1> Edit Expression Entry </h1>
           
@@ -132,12 +132,12 @@ const handleUpdateExpression1 = () => {
            </Form>
        
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="modalFooter">
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           
-          <Button variant="success" onClick={() => {handleUpdateExpression1()
+          <Button variant="dark" onClick={() => {handleUpdateExpression1()
          }}>Update Expression Entry</Button>  
         </Modal.Footer>
       </Modal>

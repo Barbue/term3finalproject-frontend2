@@ -21,14 +21,20 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: gold;
-  background-image: url('/src/acadia.gif');
+  color: goldenrod;
+  background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejN5aXNtZTFpNHZ6eXpvdHJvZ3N5Ym95NTduaDBwdTVoMWtpdnM1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/m9R3rPzyocKpZVwWnk/giphy.gif');
 }
+/* https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejN5aXNtZTFpNHZ6eXpvdHJvZ3N5Ym95NTduaDBwdTVoMWtpdnM1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/m9R3rPzyocKpZVwWnk/giphy.gif */
+
+/* '/src/acadia.gif' */
+
+/* http://gifgifs.com/animations/geography-history/international-flags/acadia.gif */
 
 
-.App-link {
+
+/* .App-link {
   color: #61dafb;
-}
+} */
 
 /* .navbar2{
   color: white;
@@ -136,6 +142,8 @@ label {
   color: red;
   font-weight: 700;
   font-size: 90%; 
+  
+  
  } 
 
  /* cadetblue */
@@ -164,8 +172,21 @@ h1{
 
 
 .pages{
-  margin-left: 1%;
+  
+  text-align: center;
+  
 }
+
+.pages2{
+  text-align: center;
+
+}
+
+/* .pagesButton{
+  color: black !important;
+  border-color: blue;
+} */
+
 
 
 
@@ -188,8 +209,12 @@ h1{
 }
 
 .wordCard{
-  
   text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   
 } 
 
@@ -197,19 +222,48 @@ h1{
   
   text-align: center;
   color: white;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   
 } 
 
 
-.navbar2{
-  color: white !important;
-  background-color: white;
+.sortingWords{
+  text-align: center;
+}
+
+.sortingExpressions{
+  text-align: center;
+}
+
+
+.navLink1{
+  color: goldenrod !important;
+
+}
+
+.modal{
+  color: goldenrod;
+  
+}
+
+.modalBody{
+  background-color:  black ;
+}
+
+.modalHeader{
+  background-color: rgb(174, 14, 14);
+}
+
+.modalFooter{
+  background-color: rgb(174, 14, 14)!important;
 }
 
 
 
-.wordCard{
-  color: white;
-}
 
+/* rgb(174, 14, 14) */
+
+/* rgb(40, 38, 38) */

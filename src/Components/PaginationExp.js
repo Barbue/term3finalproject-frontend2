@@ -19,7 +19,7 @@ const PaginationExp = ({totalExpressions, expressionsPerPage, setCurrentPage, cu
         {
            pages.map((page, i) => {
 
-           return <Button className="pages" variant="success"  key={i} onClick={() => { setCurrentPage(page) } }>{page}</Button> 
+           return <Button  variant="success"  key={i} onClick={() => { setCurrentPage(page) } }>{page}</Button> 
 
           }) 
         }

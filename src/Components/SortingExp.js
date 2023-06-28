@@ -10,7 +10,7 @@ const SortingExp = (props) => {
         } = props
 
 return (
-   <div>
+   <div className='sortingExpressions'>
      
    
    <Button variant="success" size="sm" onClick={() => {sortExpressionsAsc()

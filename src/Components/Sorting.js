@@ -10,7 +10,7 @@ const Sorting = (props) => {
         } = props
 
 return (
-   <div>
+   <div className='sortingWords'>
      
    
    <Button variant="success" size="sm" onClick={() => {sortWordsAsc()

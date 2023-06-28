@@ -46,7 +46,7 @@ const ExpressionCard = (props) => {
                 style={{ width: "27rem" }}
                 className="mb-2"
               >
-                <Card.Header style={{ color: "gold" }}>
+                <Card.Header style={{ color: "goldenrod" }}>
                   <GiFleurDeLys />
                   <GiFleurDeLys />
                   <GiFleurDeLys />
@@ -76,15 +76,6 @@ const ExpressionCard = (props) => {
                     urlEndPoint={urlEndPoint}
                   />
                   <br />
-
-                  {/* <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
-                    {" "}
-                    Theme:{" "}
-                  </Card.Subtitle>
-                  <Card.Text>
-                    {" "}
-                    <small> {expressionEntry.theme} </small>{" "}
-                  </Card.Text> */}
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
@@ -181,7 +172,7 @@ const ExpressionCard = (props) => {
                       Delete Expression
                     </Button>
 
-                    <Button
+                    {/* <Button
                       variant="primary"
                       onClick={() => {
                         navigate(
@@ -190,7 +181,7 @@ const ExpressionCard = (props) => {
                       }}
                     >
                       Edit Expression
-                    </Button>
+                    </Button> */}
                   </div>
                 </Card.Body>
               </Card>
