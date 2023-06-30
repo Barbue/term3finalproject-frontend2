@@ -9,41 +9,41 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/esm/FormGroup";
 
-function QuickEditExp(props) {
+function QuickEditFavoriteWords(props) {
   const { userId } = useAuth();
 
-  const { expressionList, urlEndPoint, setShouldRefresh, expressionEntry } =
+  const { favoriteWordList, urlEndPoint, setShouldRefresh, favoriteWordEntry } =
     props;
 
-  const [theme, setTheme] = useState(expressionEntry.theme);
-  const [expression, setExpression] = useState(expressionEntry.expression);
-  const [literaltranslation, setLiteralTranslation] = useState(
-    expressionEntry.literaltranslation
+  const [word, setWord] = useState(favoriteWordEntry.word);
+  const [partOfSpeech, setPartOfSpeech] = useState(
+    favoriteWordEntry.partOfSpeech
   );
-  const [metaphoricaltranslation, setMetaphoricalTranslation] = useState(
-    expressionEntry.metaphoricaltranslation
+  const [translation, setTranslation] = useState(favoriteWordEntry.translation);
+  const [exampleSentence, setExampleSentence] = useState(
+    favoriteWordEntry.exampleSentence
   );
-  const [createdBy, setCreatedBy] = useState(expressionEntry.createdBy);
-  const [context, setContext] = useState(expressionEntry.context);
+  const [createdBy, setCreatedBy] = useState(favoriteWordEntry.createdBy);
+  const [comments, setComments] = useState(favoriteWordEntry.comments);
 
   const navigate = useNavigate();
 
-  const handleUpdateExpression1 = () => {
+  const handleUpdateFavoriteWord = () => {
     setShouldRefresh(true);
     const req = {
-      theme: theme,
-      expression: expression,
-      literaltranslation: literaltranslation,
-      metaphoricaltranslation: metaphoricaltranslation,
+      word: word,
+      partOfSpeech: partOfSpeech,
+      translation: translation,
+      exampleSentence: exampleSentence,
       createdBy: createdBy,
-      context: context,
+      comments: comments,
       lastModified: new Date(),
       lastUpdatedById: userId,
     };
 
     const response = axios
       .put(
-        `${urlEndPoint}/expressions/update-one/${expressionEntry.createdById}`,
+        `${urlEndPoint}/favoritewords/update-one/${favoriteWordEntry.createdById}`,
         req
       )
       .then(
@@ -56,7 +56,7 @@ function QuickEditExp(props) {
         }
       );
 
-    navigate("/expressions");
+    navigate("/favoritewords");
   };
 
   const [show, setShow] = useState(false);
@@ -69,7 +69,7 @@ function QuickEditExp(props) {
         style={{ fontSize: "30px", fontWeight: 1000, color: "blue" }}
         onClick={handleShow}
       >
-        Theme: {expressionEntry.theme}
+        Word: {favoriteWordEntry.word}
       </Card.Link>
       <Modal
         className="modal"
@@ -82,43 +82,29 @@ function QuickEditExp(props) {
           <Modal.Title>Quick Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
-          <h1> Edit Expression Entry </h1>
+          <h1> Edit Favorite Word Entry </h1>
 
           <Form>
             <FormGroup>
-              <Form.Label>Theme: </Form.Label>
+              <Form.Label>Word: </Form.Label>
               <Form.Control
                 type="text"
-                value={theme}
-                name="theme"
+                value={word}
+                name="word"
                 onChange={(e) => {
-                  setTheme(e.target.value);
+                  setWord(e.target.value);
                 }}
               />
             </FormGroup>
             <br />
             <FormGroup>
-              <Form.Label>Figure Of Speech: </Form.Label>
+              <Form.Label>Part Of Speech: </Form.Label>
               <Form.Control
                 type="text"
-                value={expression}
-                name="expression"
+                value={partOfSpeech}
+                name="partOfSpeech"
                 onChange={(e) => {
-                  setExpression(e.target.value);
-                }}
-                as="textarea"
-                rows={3}
-              />
-            </FormGroup>
-            <br />
-            <FormGroup>
-              <Form.Label> Literal Translation: </Form.Label>
-              <Form.Control
-                type="text"
-                value={literaltranslation}
-                name="literaltranslation"
-                onChange={(e) => {
-                  setLiteralTranslation(e.target.value);
+                  setPartOfSpeech(e.target.value);
                 }}
                 as="textarea"
                 rows={3}
@@ -126,13 +112,27 @@ function QuickEditExp(props) {
             </FormGroup>
             <br />
             <FormGroup>
-              <Form.Label>Metaphorical Translation: </Form.Label>
+              <Form.Label>Translation: </Form.Label>
               <Form.Control
                 type="text"
-                value={metaphoricaltranslation}
-                name="metaphoricaltranslation"
+                value={translation}
+                name="translation"
                 onChange={(e) => {
-                  setMetaphoricalTranslation(e.target.value);
+                  setTranslation(e.target.value);
+                }}
+                as="textarea"
+                rows={3}
+              />
+            </FormGroup>
+            <br />
+            <FormGroup>
+              <Form.Label>Example Sentence: </Form.Label>
+              <Form.Control
+                type="text"
+                value={exampleSentence}
+                name="exampleSentence"
+                onChange={(e) => {
+                  setExampleSentence(e.target.value);
                 }}
                 as="textarea"
                 rows={3}
@@ -153,12 +153,12 @@ function QuickEditExp(props) {
             </FormGroup>
             <br />
             <FormGroup>
-              <Form.Label>Context: </Form.Label>
+              <Form.Label>Comments: </Form.Label>
               <Form.Control
-                value={context}
-                name="context"
+                value={comments}
+                name="comments"
                 onChange={(e) => {
-                  setContext(e.target.value);
+                  setComments(e.target.value);
                 }}
                 as="textarea"
                 rows={3}
@@ -166,9 +166,9 @@ function QuickEditExp(props) {
             </FormGroup>
 
             {/* <Form.Group controlId="formFileMultiple" className="mb-3">
-        <Form.Label>Multiple files input example</Form.Label>
-        <Form.Control type="file" multiple />
-      </Form.Group> */}
+      <Form.Label>Multiple files input example</Form.Label>
+      <Form.Control type="file" multiple />
+    </Form.Group> */}
           </Form>
         </Modal.Body>
         <Modal.Footer className="modalFooter">
@@ -179,10 +179,10 @@ function QuickEditExp(props) {
           <Button
             variant="dark"
             onClick={() => {
-              handleUpdateExpression1();
+              handleUpdateFavoriteWord();
             }}
           >
-            Update Expression Entry
+            Update Favorite Word Entry
           </Button>
         </Modal.Footer>
       </Modal>
@@ -190,4 +190,4 @@ function QuickEditExp(props) {
   );
 }
 
-export default QuickEditExp;
+export default QuickEditFavoriteWords;

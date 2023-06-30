@@ -16,23 +16,66 @@ import PaginationExp from "./Components/PaginationExp";
 import ExpressionFormPage from "./Pages/ExpressionFormPage";
 import EditExpressionForm from "./Components/EditExpressionForm";
 import NavBar2 from "./Components/NavBar2";
+import VerbsList from "./Pages/VerbsList";
+import VerbFormPage from "./Pages/VerbFormPage";
+import PaginationVerbs from "./Components/PaginationVerbs";
+import EditVerbForm from "./Components/EditVerbForm";
+import FavoriteWordsList from "./Pages/FavoriteWordsList";
+import PaginationFavoriteWords from "./Components/PaginationFavoriteWords"
+import FavoriteExpressionsList from "./Pages/FavoriteExpressionsList";
+import PaginationFavoriteExpressions from "./Components/PaginationFavoriteExpressions";
+import FavoriteVerbsList from "./Pages/FavoriteVerbsList";
+import PaginationFavoriteVerbs from "./Components/PaginationFavoriteVerbs";
+
+
+
+
+
 
 const urlEndPoint = process.env.REACT_APP_URL_ENDPOINT;
 
 function App() {
   //set up hooks for the state
+
+  //Words
   const [wordList, setWordList] = useState([]);
-  const [expressionList, setExpressionList] = useState([]);
-  const [shouldRefresh, setShouldRefresh] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [wordsPerPage] = useState(3);
-  const [expressionsPerPage, setExpressionsPerPage] = useState(3);
   const [filteredWords, setFilteredWords] = useState([]);
-  const [filteredExpressions, setFilteredExpressions] = useState([]);
-
   // setWordsPerPage
 
-  //load the word items from the back end
+  //Favorite Words
+  const [favoriteWordList, setFavoriteWordList] = useState([]);
+  //const [currentPage, setCurrentPage] = useState(1);
+  const [favoriteWordsPerPage, setFavoriteWordsPerPage] = useState(3);
+  const [filteredFavoriteWords, setFilteredFavoriteWords] = useState([]);
+
+  // Expressions
+  const [expressionList, setExpressionList] = useState([]);
+  const [expressionsPerPage, setExpressionsPerPage] = useState(3);
+  const [filteredExpressions, setFilteredExpressions] = useState([]);
+
+  // Favorite Expressions
+  const [favoriteExpressionList, setFavoriteExpressionList] = useState([]);
+  const [favoriteExpressionsPerPage, setFavoriteExpressionsPerPage] =
+    useState(3);
+  const [filteredFavoriteExpressions, setFilteredFavoriteExpressions] =
+    useState([]);
+
+  // Verbs
+  const [verbList, setVerbList] = useState([]);
+  const [verbsPerPage, setVerbsPerPage] = useState(3);
+  const [filteredVerbs, setFilteredVerbs] = useState([]);
+
+  // Favorite Verbs
+  const [favoriteVerbList, setFavoriteVerbList] = useState([]);
+  const [favoriteVerbsPerPage, setFavoriteVerbsPerPage] = useState(3);
+  const [filteredFavoriteVerbs, setFilteredFavoriteVerbs] = useState([]);
+
+  // Refresh
+  const [shouldRefresh, setShouldRefresh] = useState(false);
+
+  // load the word items from the back end
   useEffect(() => {
     axios
       .get(`${urlEndPoint}/words/all`)
@@ -46,7 +89,7 @@ function App() {
       });
   }, [shouldRefresh]);
 
-  //load the expression items from the back end
+  // load the expression items from the back end
   useEffect(() => {
     axios
       .get(`${urlEndPoint}/expressions/all`)
@@ -60,19 +103,100 @@ function App() {
       });
   }, [shouldRefresh]);
 
+  // load the verb items from the back end
+
+  useEffect(() => {
+    axios
+      .get(`${urlEndPoint}/verbs/all`)
+      .then(function (response) {
+        console.log(response);
+        setVerbList(response.data.verbs);
+        setFilteredVerbs(response.data.verbs);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [shouldRefresh]);
+
+  //console.log(filteredVerbs)
+
+  // load the favorite word items from the back end
+
+  useEffect(() => {
+    axios
+      .get(`${urlEndPoint}/favoritewords/all`)
+      .then(function (response) {
+        console.log(response);
+        setFavoriteWordList(response.data.favoritewords);
+        setFilteredFavoriteWords(response.data.favoritewords);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [shouldRefresh]);
+
+  // load the favorite expression items from the back end
+
+  useEffect(() => {
+    axios
+      .get(`${urlEndPoint}/favoriteexpressions/all`)
+      .then(function (response) {
+        console.log(response);
+        setFavoriteExpressionList(response.data.favoriteexpressions);
+        setFilteredFavoriteExpressions(response.data.favoriteexpressions);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [shouldRefresh]);
+
+  // load the favorite verb items from the back end
+
+  useEffect(() => {
+    axios
+      .get(`${urlEndPoint}/favoriteverbs/all`)
+      .then(function (response) {
+        console.log(response);
+        setFavoriteVerbList(response.data.favoriteverbs);
+        setFilteredFavoriteVerbs(response.data.favoriteverbs);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [shouldRefresh]);
+
   // Pagination
-  // so if current page is 1 and there are 5 words per page, then
-  // last index of page will be 5
+
+  // so if current page is 1 and there are 5 words/expressions/verbs per page, then last index of page will be 5
+
   const indexOfLastWord = currentPage * wordsPerPage;
   const indexOfLastExpression = currentPage * expressionsPerPage;
+  const indexOfLastVerb = currentPage * verbsPerPage;
 
-  // so if last index  of last word is 5 and words per page is 5,
-  // then the index of first word will be 1 because index starts at 0.
+  // Favorites
+  const indexOfLastFavoriteWord = currentPage * favoriteWordsPerPage;
+  const indexOfLastFavoriteExpression =
+    currentPage * favoriteExpressionsPerPage;
+  const indexOfLastFavoriteVerb = currentPage * favoriteVerbsPerPage;
+
+  // so if last index  of last word/expression/verb is 5 and word/expression/verb per page is 5, then the index of first word/expression/verb will be 1 because index starts at 0.
+
   const indexOfFirstWord = indexOfLastWord - wordsPerPage;
   const indexOfFirstExpression = indexOfLastExpression - expressionsPerPage;
+  const indexOfFirstVerb = indexOfLastVerb - verbsPerPage;
 
-  // so if the "indexOfFirstWord" is "0" and the "indexOfLastWord"
-  // is "5", then the displayed page will include indexes 0-4(words 1-5) and end with index 5, which is not included.
+  // Favorites
+
+  const indexOfFirstFavoriteWord =
+    indexOfLastFavoriteWord - favoriteWordsPerPage;
+
+  const indexOfFirstFavoriteExpression =
+    indexOfLastFavoriteExpression - favoriteExpressionsPerPage;
+    
+  const indexOfFirstFavoriteVerb =
+    indexOfLastFavoriteVerb - favoriteVerbsPerPage;
+
+  // so if the "indexOfFirstWord/Expression/Verb" is "0" and the "indexOfLastWord/Expression/Verb" is "5", then the displayed page will include indexes 0-4(word/expression/verb 1-5) and end with index 5, which is not included.
   const currentWords = filteredWords.slice(indexOfFirstWord, indexOfLastWord);
   console.log(currentWords);
 
@@ -82,59 +206,162 @@ function App() {
   );
   console.log(currentExpressions);
 
-  // Sorting Word, ascending order(alphabetical):
-  // Spread operator "spreads" filteredWords into its elements, makes a copy of it, then sorts(mutates) that copy
+  const currentVerbs = filteredVerbs.slice(indexOfFirstVerb, indexOfLastVerb);
+  console.log(currentVerbs);
+
+  //Favorites
+
+  const currentFavoriteWords = filteredFavoriteWords.slice(
+    indexOfFirstFavoriteWord,
+    indexOfLastFavoriteWord
+  );
+  console.log(currentFavoriteWords);
+
+  const currentFavoriteExpressions = filteredFavoriteExpressions.slice(
+    indexOfFirstFavoriteExpression,
+    indexOfLastFavoriteExpression
+  );
+  console.log(currentFavoriteExpressions);
+
+  const currentFavoriteVerbs = filteredFavoriteVerbs.slice(
+    indexOfFirstFavoriteVerb,
+    indexOfLastFavoriteVerb
+  );
+  console.log(currentFavoriteVerbs);
+
+  // Sorting Word/Expression/Verb, ascending order(alphabetical):
+  // Spread operator "spreads" filteredWords/Expressions/Verbs into its elements, makes a copy of it, then sorts(mutates) that copy
   // A conditional (ternary) operator is used in this compare function.
   // The array of objects are sorted by comparing the return value(Unicode code point value) of one of the properties(word).
-  // if value of a.word is > b.word, return 1, if not return -1
+  // if value of a.word/expression/verb is > b.word/expression/verb, return 1, if not return -1
 
   // > 0 sorts a after b or [b,a]
   // < 0 sorts a before b [a,b]
   // === 0 keeps original of a and b
 
-  const sortWordsAsc = () => {
-    const sortedWordsAscending = [...filteredWords].sort((a, b) => {
-      return a.word.toLowerCase() > b.word.toLowerCase() ? 1 : -1;
-    });
-    setFilteredWords(sortedWordsAscending);
-    console.log(sortedWordsAscending);
-  };
+  // const sortWordsAsc = () => {
+  //   const sortedWordsAscending = [...filteredWords].sort((a, b) => {
+  //     return a.word.toLowerCase() > b.word.toLowerCase() ? 1 : -1;
+  //   });
+  //   setFilteredWords(sortedWordsAscending);
+  //   console.log(sortedWordsAscending);
+  // };
 
-  const sortExpressionsAsc = () => {
-    const sortedExpressionsAscending = [...filteredExpressions].sort((a, b) => {
-      return a.expression.toLowerCase() > b.expression.toLowerCase() ? 1 : -1;
-    });
-    setFilteredExpressions(sortedExpressionsAscending);
-    console.log(sortedExpressionsAscending);
-  };
+  // const sortExpressionsAsc = () => {
+  //   const sortedExpressionsAscending = [...filteredExpressions].sort((a, b) => {
+  //     return a.expression.toLowerCase() > b.expression.toLowerCase() ? 1 : -1;
+  //   });
+  //   setFilteredExpressions(sortedExpressionsAscending);
+  //   console.log(sortedExpressionsAscending);
+  // };
 
-  // Sorting by word, descending order(alphabetical):
-  // Spread operator "spreads" filteredWords into its elements, makes a copy of it, then sorts(mutates) that copy
+  // const sortVerbsAsc = () => {
+  //   const sortedVerbsAscending = [...filteredVerbs].sort((a, b) => {
+  //     return a.verb.toLowerCase() > b.verb.toLowerCase() ? 1 : -1;
+  //   });
+  //   setFilteredVerbs(sortedVerbsAscending);
+  //   console.log(sortedVerbsAscending);
+  // };
+
+  // // Favorites
+
+  // const sortFavoriteWordsAsc = () => {
+  //   const sortedWordsAscending = [...filteredWords].sort((a, b) => {
+  //     return a.word.toLowerCase() > b.word.toLowerCase() ? 1 : -1;
+  //   });
+  //   setFilteredWords(sortedWordsAscending);
+  //   console.log(sortedWordsAscending);
+  // };
+
+  // const sortFavoriteExpressionsAsc = () => {
+  //   const sortedFavoriteExpressionsAscending = [
+  //     ...filteredFavoriteExpressions,
+  //   ].sort((a, b) => {
+  //     return a.expression.toLowerCase() > b.expression.toLowerCase() ? 1 : -1;
+  //   });
+  //   setFilteredFavoriteExpressions(sortedFavoriteExpressionsAscending);
+  //   console.log(sortedFavoriteExpressionsAscending);
+  // };
+
+  // const sortFavoriteVerbsAsc = () => {
+  //   const sortedFavoriteVerbsAscending = [...filteredFavoriteVerbs].sort(
+  //     (a, b) => {
+  //       return a.verb.toLowerCase() > b.verb.toLowerCase() ? 1 : -1;
+  //     }
+  //   );
+  //   setFilteredFavoriteVerbs(sortedFavoriteVerbsAscending);
+  //   console.log(sortedFavoriteVerbsAscending);
+  // };
+
+  // Sorting by Word/Expression/Verb, descending order(alphabetical):
+  // Spread operator "spreads" filteredWords/Expressions/Verbs into its elements, makes a copy of it, then sorts(mutates) that copy
   // A conditional (ternary) operator is used in this compare function.
   // The array of objects are sorted by comparing the return value(Unicode code point value) of one of the properties(word).
-  // if value of a.word is > b.word, return -1, if not return 1
+  // if value of a.word/expression/verb is > b.word/expression/verb, return -1, if not return 1
 
   // > 0 sorts a after b or [b,a]
   // < 0 sorts a before b [a,b]
   // === 0 keeps original of a and b
 
-  const sortWordsDsc = () => {
-    const sortedWordsDescending = [...filteredWords].sort((a, b) => {
-      return a.word.toLowerCase() > b.word.toLowerCase() ? -1 : 1;
-    });
-    setFilteredWords(sortedWordsDescending);
-    console.log(sortedWordsDescending);
-  };
+  // const sortWordsDsc = () => {
+  //   const sortedWordsDescending = [...filteredWords].sort((a, b) => {
+  //     return a.word.toLowerCase() > b.word.toLowerCase() ? -1 : 1;
+  //   });
+  //   setFilteredWords(sortedWordsDescending);
+  //   console.log(sortedWordsDescending);
+  // };
 
-  const sortExpressionsDsc = () => {
-    const sortedExpressionsDescending = [...filteredExpressions].sort(
-      (a, b) => {
-        return a.expression.toLowerCase() > b.expression.toLowerCase() ? -1 : 1;
-      }
-    );
-    setFilteredExpressions(sortedExpressionsDescending);
-    console.log(sortedExpressionsDescending);
-  };
+  // const sortExpressionsDsc = () => {
+  //   const sortedExpressionsDescending = [...filteredExpressions].sort(
+  //     (a, b) => {
+  //       return a.expression.toLowerCase() > b.expression.toLowerCase() ? -1 : 1;
+  //     }
+  //   );
+  //   setFilteredExpressions(sortedExpressionsDescending);
+  //   console.log(sortedExpressionsDescending);
+  // };
+
+  // const sortVerbsDsc = () => {
+  //   const sortedVerbsDescending = [...filteredVerbs].sort((a, b) => {
+  //     return a.verb.toLowerCase() > b.verb.toLowerCase() ? -1 : 1;
+  //   });
+  //   setFilteredVerbs(sortedVerbsDescending);
+  //   console.log(sortedVerbsDescending);
+  // };
+
+  // // Favorites
+
+  // const sortFavoriteWordsDsc = () => {
+  //   const sortedFavoriteWordsDescending = [...filteredFavoriteWords].sort(
+  //     (a, b) => {
+  //       return a.word.toLowerCase() > b.word.toLowerCase() ? -1 : 1;
+  //     }
+  //   );
+  //   setFilteredFavoriteWords(sortedFavoriteWordsDescending);
+  //   console.log(sortedFavoriteWordsDescending);
+  // };
+
+  // const sortFavoriteExpressionsDsc = () => {
+  //   const sortedFavoriteExpressionsDescending = [
+  //     ...filteredFavoriteExpressions,
+  //   ].sort((a, b) => {
+  //     return a.expression.toLowerCase() > b.expression.toLowerCase() ? -1 : 1;
+  //   });
+  //   setFilteredFavoriteExpressions(sortedFavoriteExpressionsDescending);
+  //   console.log(sortedFavoriteExpressionsDescending);
+  // };
+
+  // const sortFavoriteVerbsDsc = () => {
+  //   const sortedFavoriteVerbsDescending = [...filteredFavoriteVerbs].sort(
+  //     (a, b) => {
+  //       return a.verb.toLowerCase() > b.verb.toLowerCase() ? -1 : 1;
+  //     }
+  //   );
+  //   setFilteredFavoriteVerbs(sortedFavoriteVerbsDescending);
+  //   console.log(sortedFavoriteVerbsDescending);
+  // };
+
+  // Filter
 
   const filterWords = (input, field) => {
     if (field.length === 0) {
@@ -160,6 +387,66 @@ function App() {
       setFilteredExpressions(filteredExpressions);
       if (filteredExpressions.length === 0) {
         alert("No expression found!");
+      }
+    }
+  };
+
+  const filterVerbs = (input, field) => {
+    if (field.length === 0) {
+      setFilteredVerbs(verbList);
+    } else {
+      const filteredVerbs = verbList.filter((verb) => {
+        return verb[field].toLowerCase().includes(input.toLowerCase());
+      });
+      setFilteredVerbs(filteredVerbs);
+      if (filteredVerbs.length === 0) {
+        alert("No verb found!");
+      }
+    }
+  };
+
+  // Favorites Filter
+
+  const filterFavoriteWords = (input, field) => {
+    if (field.length === 0) {
+      setFilteredFavoriteWords(favoriteWordList);
+    } else {
+      const filteredFavoriteWords = favoriteWordList.filter((word) => {
+        return word[field].toLowerCase().includes(input.toLowerCase());
+      });
+      setFilteredFavoriteWords(filteredFavoriteWords);
+      if (filteredFavoriteWords.length === 0) {
+        alert("No favorite word found!");
+      }
+    }
+  };
+
+  const filterFavoriteExpressions = (input, field) => {
+    if (field.length === 0) {
+      setFilteredFavoriteExpressions(favoriteExpressionList);
+    } else {
+      const filteredFavoriteExpressions = favoriteExpressionList.filter(
+        (expression) => {
+          return expression[field].toLowerCase().includes(input.toLowerCase());
+        }
+      );
+      setFilteredFavoriteExpressions(filteredFavoriteExpressions);
+      if (filteredFavoriteExpressions.length === 0) {
+        alert("No favorite expression found!");
+      }
+    }
+  };
+
+  const filterFavoriteVerbs = (input, field) => {
+    if (field.length === 0) {
+      setFilteredFavoriteVerbs(favoriteVerbList);
+    } else {
+      const filteredFavoriteVerbs = favoriteVerbList.filter((verb) => {
+        return verb[field].toLowerCase().includes(input.toLowerCase());
+      });
+      setFilteredFavoriteVerbs(filteredFavoriteVerbs);
+      if (filteredFavoriteVerbs.length === 0) {
+        alert("No favorite verb found!");
       }
     }
   };
@@ -197,8 +484,8 @@ function App() {
                   filterWords={filterWords}
                   urlEndPoint={urlEndPoint}
                   setShouldRefresh={setShouldRefresh}
-                  sortWordsDsc={sortWordsDsc}
-                  sortWordsAsc={sortWordsAsc}
+                  // sortWordsDsc={sortWordsDsc}
+                  // sortWordsAsc={sortWordsAsc}
                 />
 
                 <Pagination
@@ -244,8 +531,8 @@ function App() {
                 filterExpressions={filterExpressions}
                 urlEndPoint={urlEndPoint}
                 setShouldRefresh={setShouldRefresh}
-                sortExpressionsDsc={sortExpressionsDsc}
-                sortExpressionsAsc={sortExpressionsAsc}
+                // sortExpressionsDsc={sortExpressionsDsc}
+                // sortExpressionsAsc={sortExpressionsAsc}
               />
 
               <PaginationExp
@@ -268,15 +555,199 @@ function App() {
           }
         />
         <Route
-            path="edit-expression/:id"
-            element={
-              <EditExpressionForm
+          path="edit-expression/:id"
+          element={
+            <EditExpressionForm
+              urlEndPoint={urlEndPoint}
+              expressionList={expressionList}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        />
+
+        <Route
+          path="/verbs"
+          element={
+            <>
+              <PrivatePage />
+
+              <VerbsList
+                verbList={currentVerbs} // without pagination it would be {verbList}
+                setVerbList={setVerbList}
+                filterVerbs={filterVerbs}
                 urlEndPoint={urlEndPoint}
-                expressionList={expressionList}
                 setShouldRefresh={setShouldRefresh}
+                // sortVerbsDsc={sortVerbsDsc}
+                // sortVerbsAsc={sortVerbsAsc}
               />
-            }
-          />
+
+              <PaginationVerbs
+                totalVerbs={filteredVerbs.length}
+                verbsPerPage={verbsPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
+            </>
+          }
+        />
+
+        <Route
+          path="verbform"
+          element={
+            <VerbFormPage
+              urlEndPoint={urlEndPoint}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        />
+        <Route
+          path="edit-verb/:id"
+          element={
+            <EditVerbForm
+              urlEndPoint={urlEndPoint}
+              verbList={verbList}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        />
+
+        <Route
+          path="/favoritewords"
+          element={
+            <>
+              <PrivatePage />
+
+              <FavoriteWordsList
+                favoriteWordList={currentFavoriteWords} // without pagination it would be {favoriteWordList}
+                setFavoriteWordList={setFavoriteWordList}
+                filterFavoriteWords={filterFavoriteWords}
+                urlEndPoint={urlEndPoint}
+                setShouldRefresh={setShouldRefresh}
+                // sortFavoriteWordsDsc={sortFavoriteWordsDsc}
+                // sortFavoriteWordsAsc={sortFavoriteWordsAsc}
+              />
+
+              <PaginationFavoriteWords
+                totalFavoriteWords={filteredFavoriteWords.length}
+                favoriteWordsPerPage={favoriteWordsPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
+            </>
+          }
+        />
+
+        {/* <Route
+          path="favoritewordsform"
+          element={
+            <favoriteWordFormPage
+              urlEndPoint={urlEndPoint}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        /> */}
+        {/* <Route
+          path="edit-favoriteword/:id"
+          element={
+            <EditFavoriteWordForm
+              urlEndPoint={urlEndPoint}
+              favoriteWordList={favoriteWordList}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        /> */}
+
+        <Route
+          path="/favoriteexpressions"
+          element={
+            <>
+              <PrivatePage />
+
+              <FavoriteExpressionsList
+                favoriteExpressionList={currentFavoriteExpressions} // without pagination it would be {favoriteExpressionList}
+                setFavoriteExpressionList={setFavoriteExpressionList}
+                filterFavoriteExpressions={filterFavoriteExpressions}
+                urlEndPoint={urlEndPoint}
+                setShouldRefresh={setShouldRefresh}
+                // sortFavoriteExpressionsDsc={sortFavoriteExpressionsDsc}
+                // sortFavoriteExpressionsAsc={sortFavoriteExpressionsAsc}
+              />
+
+              <PaginationFavoriteExpressions
+                totalFavoriteExpressions={filteredFavoriteExpressions.length}
+                favoriteExpressionsPerPage={favoriteExpressionsPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
+            </>
+          }
+        /> 
+
+        {/* <Route
+          path="favoriteexpressionsform"
+          element={
+            <favoriteExpressionFormPage
+              urlEndPoint={urlEndPoint}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        /> */}
+        {/* <Route
+          path="edit-favoriteexpression/:id"
+          element={
+            <EditFavoriteExpressionForm
+              urlEndPoint={urlEndPoint}
+              favoriteExpressionList={favoriteExpressionList}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        /> */}
+
+        <Route
+          path="/favoriteverbs"
+          element={
+            <>
+              <PrivatePage />
+
+              <FavoriteVerbsList
+                favoriteVerbList={currentFavoriteVerbs} // without pagination it would be {favoriteVerbList}
+                setFavoriteVerbList={setFavoriteVerbList}
+                filterFavoriteVerbs={filterFavoriteVerbs}
+                urlEndPoint={urlEndPoint}
+                setShouldRefresh={setShouldRefresh}
+                // sortFavoriteVerbsDsc={sortFavoriteVerbsDsc}
+                // sortFavoriteVerbsAsc={sortFavoriteVerbsAsc}
+              />
+
+              <PaginationFavoriteVerbs
+                totalFavoriteVerbs={filteredFavoriteVerbs.length}
+                favoriteVerbsPerPage={favoriteVerbsPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
+            </>
+          }
+        /> 
+
+        {/* <Route
+          path="favoriteverbform"
+          element={
+            <FavoriteVerbFormPage
+              urlEndPoint={urlEndPoint}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        /> */}
+        {/* <Route
+          path="edit-favoriteverb/:id"
+          element={
+            <EditFavoriteVerbForm
+              urlEndPoint={urlEndPoint}
+              favoriteVerbList={favoriteVerbList}
+              setShouldRefresh={setShouldRefresh}
+            />
+          }
+        /> */}
       </Routes>
     </div>
   );

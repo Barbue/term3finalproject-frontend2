@@ -5,21 +5,20 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import QuickEditExp from "./ExpresModal";
+import QuickEditVerb from "./VerbModal";
 import { GiFleurDeLys } from "react-icons/gi";
 
-const ExpressionCard = (props) => {
+const VerbCard = (props) => {
   const navigate = useNavigate();
 
-  const { expressionEntry, urlEndPoint, setShouldRefresh, expressionList } =
-    props;
-  console.log(expressionEntry);
+  const { verbEntry, urlEndPoint, setShouldRefresh, verbList } = props;
+  console.log(verbEntry);
 
-  const handleDeleteExpression = (id) => {
+  const handleDeleteVerb = (id) => {
     setShouldRefresh(true);
 
     axios
-      .delete(`${urlEndPoint}/expressions/delete-one/${id}`)
+      .delete(`${urlEndPoint}/verbs/delete-one/${id}`)
 
       .then(
         function (response) {
@@ -32,35 +31,52 @@ const ExpressionCard = (props) => {
       );
   };
 
-  const [theme, setTheme] = useState("");
-  const [expression, setExpression] = useState("");
-  const [literaltranslation, setLiteralTranslation] = useState("");
-  const [metaphoricaltranslation, setMetaphoricalTranslation] = useState("");
+
+
+
+  const [verb, setVerb] = useState("");
+  const [tense, setTense] = useState("");
+  const [je, setJe] = useState("");
+  const [tu, setTu] = useState("");
+  const [il, setIl] = useState("");
+  const [nous, setNous] = useState("");
+  const [vous, setVous] = useState("");
+  const [ils, setIls] = useState("");
   const [createdBy, setCreatedBy] = useState("");
-  const [context, setContext] = useState("");
+  const [comments, setComments] = useState("");
+
 
   useEffect(() => {
-    setTheme(expressionEntry.theme);
-    setExpression(expressionEntry.expression);
-    setLiteralTranslation(expressionEntry.literaltranslation);
-    setMetaphoricalTranslation(expressionEntry.metaphoricaltranslation);
-    setCreatedBy(expressionEntry.createdBy);
-    setContext(expressionEntry.context);
-  }, [expressionList]);
+    setVerb(verbEntry.verb);
+    setTense(verbEntry.tense);
+    setJe(verbEntry.je);
+    setTu(verbEntry.tu);
+    setIl(verbEntry.il);
+    setNous(verbEntry.nous);
+    setVous(verbEntry.vous);
+    setIls(verbEntry.ils);
+    setCreatedBy(verbEntry.createdBy);
+    setComments(verbEntry.comments);
+  }, [verbList]);
 
-  const handleFavoriteExpression = (id) => {
+  const handleFavoriteVerb = (id) => {
     setShouldRefresh(true);
     const req = {
-      theme: theme,
-      expression: expression,
-      literaltranslation: literaltranslation,
-      metaphoricaltranslation: metaphoricaltranslation,
+      verb: verb,
+      tense: tense,
+      je: je,
+      tu: tu,
+      il: il,
+      nous: nous,
+      vous: vous,
+      ils: ils,
       createdBy: createdBy,
-      context: context,
+      comments: comments,
+      
     };
-
+    
     axios
-      .post(`${urlEndPoint}/favoriteexpressions/create-one`, req) //${id}
+      .post(`${urlEndPoint}/favoriteverbs/create-one`, req) //${id}
       .then(
         function (response) {
           console.log(response);
@@ -71,11 +87,14 @@ const ExpressionCard = (props) => {
         }
       );
 
-    navigate("/expressions");
+    navigate("/verbs");
   };
 
+
+
+
   return (
-    <div className="expressionCard">
+    <div className="verbCard">
       {["Dark"].map((variant) => (
         <Row xs={1} md={2} className="g-4">
           {Array.from({ length: 1 }).map((_, idx) => (
@@ -107,11 +126,12 @@ const ExpressionCard = (props) => {
                   <GiFleurDeLys />
                   <GiFleurDeLys />
                   <GiFleurDeLys />
+                  
                 </Card.Header>
                 <Card.Body>
-                  <QuickEditExp
-                    expressionEntry={expressionEntry}
-                    expressionList={expressionList}
+                  <QuickEditVerb
+                    verbEntry={verbEntry}
+                    verbList={verbList}
                     setShouldRefresh={setShouldRefresh}
                     urlEndPoint={urlEndPoint}
                   />
@@ -119,49 +139,78 @@ const ExpressionCard = (props) => {
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Figure of Speech:{" "}
+                    Tense:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.expression} </small>{" "}
+                    <small> {verbEntry.tense} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Literal Translation:{" "}
+                    Je:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.literaltranslation} </small>{" "}
+                    <small> {verbEntry.je} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Metaphorical Translation:{" "}
+                    Tu:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small>
-                      {" "}
-                      {expressionEntry.metaphoricaltranslation}{" "}
-                    </small>{" "}
+                    <small> {verbEntry.tu} </small>{" "}
                   </Card.Text>
 
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Il/Elle:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {verbEntry.il} </small>{" "}
+                  </Card.Text>
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Nous:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {verbEntry.nous} </small>{" "}
+                  </Card.Text>
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Vous:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {verbEntry.vous} </small>{" "}
+                  </Card.Text>
+                  <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
+                    {" "}
+                    Ils/Elles:{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    {" "}
+                    <small> {verbEntry.ils} </small>{" "}
+                  </Card.Text>
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
                     Created by:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.createdBy} </small>{" "}
+                    <small> {verbEntry.createdBy} </small>{" "}
                   </Card.Text>
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Context:{" "}
+                    Comments:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.context} </small>{" "}
+                    <small> {verbEntry.comments} </small>{" "}
                   </Card.Text>
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
@@ -169,7 +218,7 @@ const ExpressionCard = (props) => {
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.createdAt} </small>{" "}
+                    <small> {verbEntry.createdAt} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
@@ -178,7 +227,7 @@ const ExpressionCard = (props) => {
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.createdById} </small>{" "}
+                    <small> {verbEntry.createdById} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
@@ -187,7 +236,7 @@ const ExpressionCard = (props) => {
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.lastUpdatedById} </small>{" "}
+                    <small> {verbEntry.lastUpdatedById} </small>{" "}
                   </Card.Text>
 
                   <Card.Footer>
@@ -198,7 +247,7 @@ const ExpressionCard = (props) => {
                       Last Modified:{" "}
                     </Card.Subtitle>
                     <small className="text-muted">
-                      <p>{expressionEntry.lastModified}</p>{" "}
+                      <p>{verbEntry.lastModified}</p>{" "}
                     </small>
                   </Card.Footer>
 
@@ -206,19 +255,19 @@ const ExpressionCard = (props) => {
                     <Button
                       variant="danger"
                       onClick={() => {
-                        handleDeleteExpression(expressionEntry.createdById);
+                        handleDeleteVerb(verbEntry.createdById);
                       }}
                     >
-                      Delete Expression
+                      Delete Verb
                     </Button>
 
                     <Button
                       variant="primary"
                       onClick={() => {
-                        handleFavoriteExpression(expressionEntry.createdById);
+                        handleFavoriteVerb(verbEntry.createdById)
                       }}
                     >
-                      Add To Favorites Expressions
+                      Add To Favorite Verbs
                     </Button>
                   </div>
                 </Card.Body>
@@ -231,4 +280,4 @@ const ExpressionCard = (props) => {
   );
 };
 
-export default ExpressionCard;
+export default VerbCard;

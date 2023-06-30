@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/esm/FormGroup';
 import { VscSearch } from "react-icons/vsc";
 
-function SearchBarExp(props){
+function SearchBarExpFavorites (props){
 
     // setting up the state 
     const [input, setInput] = useState("");
@@ -20,7 +20,7 @@ function SearchBarExp(props){
         e.preventDefault();
         
         //show filtered results, call to function in App.js 
-        props.filterExpressions(input, field);
+        props.filterFavoriteExpressions(input, field);
         
 } 
 
@@ -29,7 +29,7 @@ const handleReset1 = () => {
     setField("")
     setInput("")
 
-    props.filterExpressions("","")
+    props.filterFavoriteExpressions("","")
 
 
 
@@ -73,9 +73,9 @@ return (
             checked={field === "createdBy"}
             onChange={e => setField(e.target.value)}
             /> 
-        <Button className='bsbutton23'  variant="primary" size="sm" type="submit">
+        <Button   variant="primary" size="sm" type="submit">
             Search
-        </Button> {" "}
+        </Button> {"  "}
        
          <Button className='bsbutton2' variant="success" size="sm" onClick={handleReset1}>Reset</Button>  
         </Form> 
@@ -84,4 +84,4 @@ return (
   );
 }
 
-export default SearchBarExp;
+export default SearchBarExpFavorites;

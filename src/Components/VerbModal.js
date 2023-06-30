@@ -9,43 +9,43 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/esm/FormGroup";
 
-function QuickEditExp(props) {
+function QuickEditVerb(props) {
   const { userId } = useAuth();
 
-  const { expressionList, urlEndPoint, setShouldRefresh, expressionEntry } =
-    props;
+  const { verbList, urlEndPoint, setShouldRefresh, verbEntry } = props;
 
-  const [theme, setTheme] = useState(expressionEntry.theme);
-  const [expression, setExpression] = useState(expressionEntry.expression);
-  const [literaltranslation, setLiteralTranslation] = useState(
-    expressionEntry.literaltranslation
-  );
-  const [metaphoricaltranslation, setMetaphoricalTranslation] = useState(
-    expressionEntry.metaphoricaltranslation
-  );
-  const [createdBy, setCreatedBy] = useState(expressionEntry.createdBy);
-  const [context, setContext] = useState(expressionEntry.context);
+  const [verb, setVerb] = useState(verbEntry.verb);
+  const [tense, setTense] = useState(verbEntry.tense);
+  const [je, setJe] = useState(verbEntry.je);
+  const [tu, setTu] = useState(verbEntry.tu);
+  const [il, setIl] = useState(verbEntry.il);
+  const [nous, setNous] = useState(verbEntry.nous);
+  const [vous, setVous] = useState(verbEntry.vous);
+  const [ils, setIls] = useState(verbEntry.ils);
+  const [createdBy, setCreatedBy] = useState(verbEntry.createdBy);
+  const [comments, setComments] = useState(verbEntry.comments);
 
   const navigate = useNavigate();
 
-  const handleUpdateExpression1 = () => {
+  const handleUpdateVerb1 = () => {
     setShouldRefresh(true);
     const req = {
-      theme: theme,
-      expression: expression,
-      literaltranslation: literaltranslation,
-      metaphoricaltranslation: metaphoricaltranslation,
+      verb: verb,
+      tense: tense,
+      je: je,
+      tu: tu,
+      il: il,
+      nous: nous,
+      vous: vous,
+      ils: ils,
       createdBy: createdBy,
-      context: context,
+      comments: comments,
       lastModified: new Date(),
       lastUpdatedById: userId,
     };
 
     const response = axios
-      .put(
-        `${urlEndPoint}/expressions/update-one/${expressionEntry.createdById}`,
-        req
-      )
+      .put(`${urlEndPoint}/verbs/update-one/${verbEntry.createdById}`, req)
       .then(
         function (response) {
           console.log(response);
@@ -56,7 +56,7 @@ function QuickEditExp(props) {
         }
       );
 
-    navigate("/expressions");
+    navigate("/verbs");
   };
 
   const [show, setShow] = useState(false);
@@ -69,7 +69,7 @@ function QuickEditExp(props) {
         style={{ fontSize: "30px", fontWeight: 1000, color: "blue" }}
         onClick={handleShow}
       >
-        Theme: {expressionEntry.theme}
+        Verb: {verbEntry.verb}
       </Card.Link>
       <Modal
         className="modal"
@@ -82,29 +82,42 @@ function QuickEditExp(props) {
           <Modal.Title>Quick Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
-          <h1> Edit Expression Entry </h1>
+          <h1> Edit Verb Entry </h1>
 
           <Form>
             <FormGroup>
-              <Form.Label>Theme: </Form.Label>
+              <Form.Label>Verb: </Form.Label>
               <Form.Control
                 type="text"
-                value={theme}
-                name="theme"
+                value={verb}
+                name="verb"
                 onChange={(e) => {
-                  setTheme(e.target.value);
+                  setVerb(e.target.value);
+                }}
+              />
+            </FormGroup>
+            <br />
+
+            <FormGroup>
+              <Form.Label>Tense: </Form.Label>
+              <Form.Control
+                type="text"
+                value={tense}
+                name="tense"
+                onChange={(e) => {
+                  setTense(e.target.value);
                 }}
               />
             </FormGroup>
             <br />
             <FormGroup>
-              <Form.Label>Figure Of Speech: </Form.Label>
+              <Form.Label>Je: </Form.Label>
               <Form.Control
                 type="text"
-                value={expression}
-                name="expression"
+                value={je}
+                name="je"
                 onChange={(e) => {
-                  setExpression(e.target.value);
+                  setJe(e.target.value);
                 }}
                 as="textarea"
                 rows={3}
@@ -112,13 +125,13 @@ function QuickEditExp(props) {
             </FormGroup>
             <br />
             <FormGroup>
-              <Form.Label> Literal Translation: </Form.Label>
+              <Form.Label>Tu: </Form.Label>
               <Form.Control
                 type="text"
-                value={literaltranslation}
-                name="literaltranslation"
+                value={tu}
+                name="translation"
                 onChange={(e) => {
-                  setLiteralTranslation(e.target.value);
+                  setTu(e.target.value);
                 }}
                 as="textarea"
                 rows={3}
@@ -126,13 +139,55 @@ function QuickEditExp(props) {
             </FormGroup>
             <br />
             <FormGroup>
-              <Form.Label>Metaphorical Translation: </Form.Label>
+              <Form.Label>Il/Elle: </Form.Label>
               <Form.Control
                 type="text"
-                value={metaphoricaltranslation}
-                name="metaphoricaltranslation"
+                value={il}
+                name="il"
                 onChange={(e) => {
-                  setMetaphoricalTranslation(e.target.value);
+                  setIl(e.target.value);
+                }}
+                as="textarea"
+                rows={3}
+              />
+            </FormGroup>
+            <br />
+            <FormGroup>
+              <Form.Label>Nous: </Form.Label>
+              <Form.Control
+                type="text"
+                value={nous}
+                name="nous"
+                onChange={(e) => {
+                  setNous(e.target.value);
+                }}
+                as="textarea"
+                rows={3}
+              />
+            </FormGroup>
+            <br />
+            <FormGroup>
+              <Form.Label>Vous: </Form.Label>
+              <Form.Control
+                type="text"
+                value={vous}
+                name="vous"
+                onChange={(e) => {
+                  setVous(e.target.value);
+                }}
+                as="textarea"
+                rows={3}
+              />
+            </FormGroup>
+            <br />
+            <FormGroup>
+              <Form.Label>Ils/Elles: </Form.Label>
+              <Form.Control
+                type="text"
+                value={ils}
+                name="ils"
+                onChange={(e) => {
+                  setIls(e.target.value);
                 }}
                 as="textarea"
                 rows={3}
@@ -153,12 +208,12 @@ function QuickEditExp(props) {
             </FormGroup>
             <br />
             <FormGroup>
-              <Form.Label>Context: </Form.Label>
+              <Form.Label>Comments: </Form.Label>
               <Form.Control
-                value={context}
-                name="context"
+                value={comments}
+                name="comments"
                 onChange={(e) => {
-                  setContext(e.target.value);
+                  setComments(e.target.value);
                 }}
                 as="textarea"
                 rows={3}
@@ -166,9 +221,9 @@ function QuickEditExp(props) {
             </FormGroup>
 
             {/* <Form.Group controlId="formFileMultiple" className="mb-3">
-        <Form.Label>Multiple files input example</Form.Label>
-        <Form.Control type="file" multiple />
-      </Form.Group> */}
+      <Form.Label>Multiple files input example</Form.Label>
+      <Form.Control type="file" multiple />
+    </Form.Group> */}
           </Form>
         </Modal.Body>
         <Modal.Footer className="modalFooter">
@@ -179,10 +234,10 @@ function QuickEditExp(props) {
           <Button
             variant="dark"
             onClick={() => {
-              handleUpdateExpression1();
+              handleUpdateVerb1();
             }}
           >
-            Update Expression Entry
+            Update Verb Entry
           </Button>
         </Modal.Footer>
       </Modal>
@@ -190,4 +245,4 @@ function QuickEditExp(props) {
   );
 }
 
-export default QuickEditExp;
+export default QuickEditVerb;

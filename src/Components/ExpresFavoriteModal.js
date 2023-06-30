@@ -9,26 +9,32 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/esm/FormGroup";
 
-function QuickEditExp(props) {
+function QuickEditExpFavorite(props) {
   const { userId } = useAuth();
 
-  const { expressionList, urlEndPoint, setShouldRefresh, expressionEntry } =
-    props;
+  const {
+    favoriteExpressionList,
+    urlEndPoint,
+    setShouldRefresh,
+    favoriteExpressionEntry,
+  } = props;
 
-  const [theme, setTheme] = useState(expressionEntry.theme);
-  const [expression, setExpression] = useState(expressionEntry.expression);
+  const [theme, setTheme] = useState(favoriteExpressionEntry.theme);
+  const [expression, setExpression] = useState(
+    favoriteExpressionEntry.expression
+  );
   const [literaltranslation, setLiteralTranslation] = useState(
-    expressionEntry.literaltranslation
+    favoriteExpressionEntry.literaltranslation
   );
   const [metaphoricaltranslation, setMetaphoricalTranslation] = useState(
-    expressionEntry.metaphoricaltranslation
+    favoriteExpressionEntry.metaphoricaltranslation
   );
-  const [createdBy, setCreatedBy] = useState(expressionEntry.createdBy);
-  const [context, setContext] = useState(expressionEntry.context);
+  const [createdBy, setCreatedBy] = useState(favoriteExpressionEntry.createdBy);
+  const [context, setContext] = useState(favoriteExpressionEntry.context);
 
   const navigate = useNavigate();
 
-  const handleUpdateExpression1 = () => {
+  const handleUpdateFavoriteExpression = () => {
     setShouldRefresh(true);
     const req = {
       theme: theme,
@@ -43,7 +49,7 @@ function QuickEditExp(props) {
 
     const response = axios
       .put(
-        `${urlEndPoint}/expressions/update-one/${expressionEntry.createdById}`,
+        `${urlEndPoint}/favoriteexpressions/update-one/${favoriteExpressionEntry.createdById}`,
         req
       )
       .then(
@@ -56,7 +62,7 @@ function QuickEditExp(props) {
         }
       );
 
-    navigate("/expressions");
+    navigate("/favoriteexpressions");
   };
 
   const [show, setShow] = useState(false);
@@ -69,7 +75,7 @@ function QuickEditExp(props) {
         style={{ fontSize: "30px", fontWeight: 1000, color: "blue" }}
         onClick={handleShow}
       >
-        Theme: {expressionEntry.theme}
+        Theme: {favoriteExpressionEntry.theme}
       </Card.Link>
       <Modal
         className="modal"
@@ -179,10 +185,10 @@ function QuickEditExp(props) {
           <Button
             variant="dark"
             onClick={() => {
-              handleUpdateExpression1();
+              handleUpdateFavoriteExpression();
             }}
           >
-            Update Expression Entry
+            Update Favorite Expression Entry
           </Button>
         </Modal.Footer>
       </Modal>
@@ -190,4 +196,4 @@ function QuickEditExp(props) {
   );
 }
 
-export default QuickEditExp;
+export default QuickEditExpFavorite;

@@ -27,7 +27,7 @@ function EditExpressionForm(props) {
     const foundExpression = expressionList.find((expression) => {
       return expression.createdById === id;
     });
-    setTheme(foundExpression.theme)
+    setTheme(foundExpression.theme);
     setExpression(foundExpression.expression);
     setLiteralTranslation(foundExpression.literaltranslation);
     setMetaphoricalTranslation(foundExpression.metaphoricaltranslation);

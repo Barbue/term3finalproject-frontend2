@@ -1,8 +1,7 @@
 import WordCard from "../Components/WordCard";
 import SearchBar from "../Components/SearchBar";
-import Sorting from "../Components/Sorting";
+//import Sorting from "../Components/Sorting";
 import { GiFleurDeLys, GiTrefoilLily } from "react-icons/gi";
-
 
 //home page component
 
@@ -15,16 +14,14 @@ const WordsList = (props) => {
     urlEndPoint,
     setShouldRefresh,
     filterWords,
-    sortWordsDsc,
-    sortWordsAsc,
+    // sortWordsDsc,
+    // sortWordsAsc,
   } = props;
 
   console.log(wordList);
 
   return (
     <div className="wordList">
-      
-
       <SearchBar
         filterWords={filterWords}
         wordList={wordList}
@@ -34,14 +31,22 @@ const WordsList = (props) => {
 
       <h1 className="wordsTitle">
         {" "}
-        <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/> Mots - Words <GiFleurDeLys/><GiFleurDeLys/><GiFleurDeLys/> {" "}
+        <GiFleurDeLys />
+        <GiFleurDeLys />
+        <GiFleurDeLys /> Mots <GiFleurDeLys />
+        <GiFleurDeLys />
+        <GiFleurDeLys />
+        <br />
+        <GiFleurDeLys />
+        <GiFleurDeLys /> Words <GiFleurDeLys />
+        <GiFleurDeLys />
       </h1>
 
       <br />
 
-      <div className="sorting">
+      {/* <div className="sorting">
         <Sorting sortWordsDsc={sortWordsDsc} sortWordsAsc={sortWordsAsc} />
-      </div>
+      </div> */}
 
       {wordList.map((item, index) => {
         return (
@@ -60,4 +65,3 @@ const WordsList = (props) => {
 };
 
 export default WordsList;
-

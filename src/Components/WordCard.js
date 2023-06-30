@@ -1,17 +1,26 @@
-//import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import QuickEdit from "./Modal";
 import { GiFleurDeLys } from "react-icons/gi";
+import Sorting from "./Sorting";
 
 const WordCard = (props) => {
   const navigate = useNavigate();
 
-  const { wordEntry, urlEndPoint, setShouldRefresh, wordList } = props;
+  const {
+    wordEntry,
+    urlEndPoint,
+    setShouldRefresh,
+    wordList,
+    sortWordsDsc,
+    sortWordsAsc,
+  } = props;
   console.log(wordEntry);
 
   const handleDeleteWord = (id) => {
@@ -31,6 +40,48 @@ const WordCard = (props) => {
       );
   };
 
+  const [word, setWord] = useState("");
+  const [partOfSpeech, setPartOfSpeech] = useState("");
+  const [translation, setTranslation] = useState("");
+  const [exampleSentence, setExampleSentence] = useState("");
+  const [createdBy, setCreatedBy] = useState("");
+  const [comments, setComments] = useState("");
+
+  useEffect(() => {
+    setWord(wordEntry.word);
+    setPartOfSpeech(wordEntry.partOfSpeech);
+    setTranslation(wordEntry.translation);
+    setExampleSentence(wordEntry.exampleSentence);
+    setCreatedBy(wordEntry.createdBy);
+    setComments(wordEntry.comments);
+  }, [wordList]);
+
+  const handleFavoriteWord = (id) => {
+    setShouldRefresh(true);
+    const req = {
+      word: word,
+      partOfSpeech: partOfSpeech,
+      translation: translation,
+      exampleSentence: exampleSentence,
+      createdBy: createdBy,
+      comments: comments,
+    };
+
+    axios
+      .post(`${urlEndPoint}/favoritewords/create-one`, req) //${id}
+      .then(
+        function (response) {
+          console.log(response);
+          setShouldRefresh(false);
+        },
+        {
+          "Content-Type": "application/json",
+        }
+      );
+
+    navigate("/");
+  };
+
   return (
     <div className="wordCard">
       {["Dark"].map((variant) => (
@@ -46,8 +97,6 @@ const WordCard = (props) => {
                 className="mb-2"
               >
                 <Card.Header style={{ color: "goldenrod" }}>
-                  <GiFleurDeLys />
-                  <GiFleurDeLys />
                   <GiFleurDeLys />
                   <GiFleurDeLys />
                   <GiFleurDeLys />
@@ -168,15 +217,16 @@ const WordCard = (props) => {
                     >
                       Delete Word
                     </Button>
-{/* 
+
                     <Button
                       variant="primary"
                       onClick={() => {
-                        navigate(`/edit-word/${wordEntry.createdById}`);
+                        handleFavoriteWord(wordEntry.createdById);
+                        // navigate(`/edit-word/${wordEntry.createdById}`);
                       }}
                     >
-                      Edit Word
-                    </Button> */}
+                      Add To Favorite Words
+                    </Button>
                   </div>
                 </Card.Body>
               </Card>

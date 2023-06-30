@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -5,21 +6,21 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import QuickEditExp from "./ExpresModal";
+import QuickEditFavoriteWords from "./FavoriteWordModal";
 import { GiFleurDeLys } from "react-icons/gi";
 
-const ExpressionCard = (props) => {
+const FavoriteWordCard = (props) => {
   const navigate = useNavigate();
 
-  const { expressionEntry, urlEndPoint, setShouldRefresh, expressionList } =
+  const { favoriteWordEntry, urlEndPoint, setShouldRefresh, favoriteWordList } =
     props;
-  console.log(expressionEntry);
+  console.log(favoriteWordEntry);
 
-  const handleDeleteExpression = (id) => {
+  const handleDeleteFavoriteWord = (id) => {
     setShouldRefresh(true);
 
     axios
-      .delete(`${urlEndPoint}/expressions/delete-one/${id}`)
+      .delete(`${urlEndPoint}/favoritewords/delete-one/${id}`)
 
       .then(
         function (response) {
@@ -30,52 +31,10 @@ const ExpressionCard = (props) => {
           "Content-Type": "application/json",
         }
       );
-  };
-
-  const [theme, setTheme] = useState("");
-  const [expression, setExpression] = useState("");
-  const [literaltranslation, setLiteralTranslation] = useState("");
-  const [metaphoricaltranslation, setMetaphoricalTranslation] = useState("");
-  const [createdBy, setCreatedBy] = useState("");
-  const [context, setContext] = useState("");
-
-  useEffect(() => {
-    setTheme(expressionEntry.theme);
-    setExpression(expressionEntry.expression);
-    setLiteralTranslation(expressionEntry.literaltranslation);
-    setMetaphoricalTranslation(expressionEntry.metaphoricaltranslation);
-    setCreatedBy(expressionEntry.createdBy);
-    setContext(expressionEntry.context);
-  }, [expressionList]);
-
-  const handleFavoriteExpression = (id) => {
-    setShouldRefresh(true);
-    const req = {
-      theme: theme,
-      expression: expression,
-      literaltranslation: literaltranslation,
-      metaphoricaltranslation: metaphoricaltranslation,
-      createdBy: createdBy,
-      context: context,
-    };
-
-    axios
-      .post(`${urlEndPoint}/favoriteexpressions/create-one`, req) //${id}
-      .then(
-        function (response) {
-          console.log(response);
-          setShouldRefresh(false);
-        },
-        {
-          "Content-Type": "application/json",
-        }
-      );
-
-    navigate("/expressions");
   };
 
   return (
-    <div className="expressionCard">
+    <div className="wordCard">
       {["Dark"].map((variant) => (
         <Row xs={1} md={2} className="g-4">
           {Array.from({ length: 1 }).map((_, idx) => (
@@ -109,9 +68,9 @@ const ExpressionCard = (props) => {
                   <GiFleurDeLys />
                 </Card.Header>
                 <Card.Body>
-                  <QuickEditExp
-                    expressionEntry={expressionEntry}
-                    expressionList={expressionList}
+                  <QuickEditFavoriteWords
+                    favoriteWordEntry={favoriteWordEntry}
+                    favoriteWordList={favoriteWordList}
                     setShouldRefresh={setShouldRefresh}
                     urlEndPoint={urlEndPoint}
                   />
@@ -119,49 +78,47 @@ const ExpressionCard = (props) => {
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Figure of Speech:{" "}
+                    Part Of Speech:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.expression} </small>{" "}
+                    <small> {favoriteWordEntry.partOfSpeech} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Literal Translation:{" "}
+                    Translation:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.literaltranslation} </small>{" "}
+                    <small> {favoriteWordEntry.translation} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Metaphorical Translation:{" "}
+                    Example Sentence:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small>
-                      {" "}
-                      {expressionEntry.metaphoricaltranslation}{" "}
-                    </small>{" "}
+                    <small> {favoriteWordEntry.exampleSentence} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Created by:{" "}
+                    Created By:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.createdBy} </small>{" "}
+                    <small> {favoriteWordEntry.createdBy} </small>{" "}
                   </Card.Text>
+
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
-                    Context:{" "}
+                    Comments:{" "}
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.context} </small>{" "}
+                    <small> {favoriteWordEntry.comments} </small>{" "}
                   </Card.Text>
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
                     {" "}
@@ -169,7 +126,7 @@ const ExpressionCard = (props) => {
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.createdAt} </small>{" "}
+                    <small> {favoriteWordEntry.createdAt} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
@@ -178,7 +135,7 @@ const ExpressionCard = (props) => {
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.createdById} </small>{" "}
+                    <small> {favoriteWordEntry.createdById} </small>{" "}
                   </Card.Text>
 
                   <Card.Subtitle style={{ fontSize: "25px", fontWeight: 1000 }}>
@@ -187,7 +144,7 @@ const ExpressionCard = (props) => {
                   </Card.Subtitle>
                   <Card.Text>
                     {" "}
-                    <small> {expressionEntry.lastUpdatedById} </small>{" "}
+                    <small> {favoriteWordEntry.lastUpdatedById} </small>{" "}
                   </Card.Text>
 
                   <Card.Footer>
@@ -198,7 +155,7 @@ const ExpressionCard = (props) => {
                       Last Modified:{" "}
                     </Card.Subtitle>
                     <small className="text-muted">
-                      <p>{expressionEntry.lastModified}</p>{" "}
+                      <p>{favoriteWordEntry.lastModified}</p>{" "}
                     </small>
                   </Card.Footer>
 
@@ -206,19 +163,10 @@ const ExpressionCard = (props) => {
                     <Button
                       variant="danger"
                       onClick={() => {
-                        handleDeleteExpression(expressionEntry.createdById);
+                        handleDeleteFavoriteWord(favoriteWordEntry.createdById);
                       }}
                     >
-                      Delete Expression
-                    </Button>
-
-                    <Button
-                      variant="primary"
-                      onClick={() => {
-                        handleFavoriteExpression(expressionEntry.createdById);
-                      }}
-                    >
-                      Add To Favorites Expressions
+                      Delete Word
                     </Button>
                   </div>
                 </Card.Body>
@@ -231,4 +179,4 @@ const ExpressionCard = (props) => {
   );
 };
 
-export default ExpressionCard;
+export default FavoriteWordCard;

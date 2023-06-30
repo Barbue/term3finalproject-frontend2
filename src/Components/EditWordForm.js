@@ -49,7 +49,7 @@ function EditWordForm(props) {
       lastUpdatedById: userId,
     };
     const response = axios
-      .put(`${urlEndPoint}/words/update-one/${id}`, req)
+      .post(`${urlEndPoint}/favoritewords/create-one`, req) //${id}
       .then(
         function (response) {
           console.log(response);

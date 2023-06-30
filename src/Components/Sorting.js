@@ -1,31 +1,31 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
+// import React from 'react';
+// import Button from 'react-bootstrap/Button';
 
 
-const Sorting = (props) => {
+// const Sorting = (props) => {
        
-        const {
-            sortWordsAsc, 
-            sortWordsDsc,
-        } = props
+//         const {
+//             sortWordsAsc, 
+//             sortWordsDsc,
+//         } = props
 
-return (
-   <div className='sortingWords'>
-     
+// return (
+// //    <div className='sortingWords'>
+//      <>
    
-   <Button variant="success" size="sm" onClick={() => {sortWordsAsc()
-          }}>Asc</Button>
-          {" "}
+//    <Button className='sortingWords' variant="success" size="sm" onClick={() => {sortWordsAsc()
+//           }}>Asc</Button>
+//           {" "}
 
-   <Button variant="success" size="sm" onClick={() => {sortWordsDsc()
-          }}>Dsc</Button>
+//    <Button variant="success" size="sm" onClick={() => {sortWordsDsc()
+//           }}>Dsc</Button>
+// </>
+//   /* </div> */
 
-  </div>
+//   )
+// };
 
-  )
-};
-
-export default Sorting
+// export default Sorting
   
 
 

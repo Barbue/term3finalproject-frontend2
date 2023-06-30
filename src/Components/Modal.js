@@ -65,14 +65,15 @@ function QuickEdit(props) {
       >
         Word: {wordEntry.word}
       </Card.Link>
-      <Modal className="modal"
+      <Modal
+        className="modal"
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
         <Modal.Header className="modalHeader" closeButton>
-          <Modal.Title >Quick Edit</Modal.Title>
+          <Modal.Title>Quick Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modalBody">
           <h1> Edit Word Entry </h1>
@@ -184,25 +185,6 @@ function QuickEdit(props) {
 }
 
 export default QuickEdit;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function QuickEdit(props) {
 //   const { userId } = useAuth();

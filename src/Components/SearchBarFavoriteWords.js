@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/esm/FormGroup';
 import { VscSearch } from "react-icons/vsc";
 
-function SearchBarExp(props){
+function SearchBarFavoriteWords(props){
 
     // setting up the state 
     const [input, setInput] = useState("");
@@ -16,20 +16,20 @@ function SearchBarExp(props){
     
 
     
-    const handleOnSubmit1 = e => {
+    const handleOnSubmit = e => {
         e.preventDefault();
         
         //show filtered results, call to function in App.js 
-        props.filterExpressions(input, field);
+        props.filterFavoriteWords(input, field);
         
 } 
 
-const handleReset1 = () => {
+const handleReset = () => {
 
     setField("")
     setInput("")
 
-    props.filterExpressions("","")
+    props.filterFavoriteWords("","")
 
 
 
@@ -40,27 +40,27 @@ return (
     <>
          
          
-        <Form className="switchBarFont" onSubmit={handleOnSubmit1}> 
+        <Form className="switchBarFont" onSubmit={handleOnSubmit}> 
         <FormGroup >
         <Form.Label htmlFor="search"><VscSearch/>Search: </Form.Label>
         <Form.Control  type="text" id="search" name="search" value={input} onChange={(e) => { setInput(e.target.value) }} />
         </FormGroup>  
         <Form.Check
             inline
-            label="Theme"
+            label="Word"
             id="custom-switch"
             type="switch"
-            value="theme"
-            checked={field === "theme"}
+            value="word"
+            checked={field === "word"}
             onChange={e => setField(e.target.value)}
             /> 
             <Form.Check
             inline
-            label="Expression"
+            label="Part Of Speech"
             id="custom-switch"
             type="switch"
-            value="expression"
-            checked={field === "expression"}
+            value="partOfSpeech"
+            checked={field === "partOfSpeech"}
             onChange={e => setField(e.target.value)}
             /> 
             
@@ -73,15 +73,18 @@ return (
             checked={field === "createdBy"}
             onChange={e => setField(e.target.value)}
             /> 
-        <Button className='bsbutton23'  variant="primary" size="sm" type="submit">
+        <Button className="bsbutton1favwords" variant="primary" size="sm" type="submit">
             Search
-        </Button> {" "}
+        </Button> {"  "}
        
-         <Button className='bsbutton2' variant="success" size="sm" onClick={handleReset1}>Reset</Button>  
+         <Button className='bsbutton2favwords' variant="success" size="sm" onClick={handleReset}>Reset</Button>  
         </Form> 
         <br/>
     </> 
   );
 }
 
-export default SearchBarExp;
+export default SearchBarFavoriteWords;
+
+
+

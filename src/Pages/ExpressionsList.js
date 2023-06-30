@@ -39,9 +39,9 @@ const ExpressionsList = (props) => {
 
       <br />
 
-      <div className="sortingexp">
+      {/* <div className="sortingexp">
         <SortingExp sortExpressionsDsc={sortExpressionsDsc} sortExpressionsAsc={sortExpressionsAsc} />
-      </div>
+      </div> */}
 
       {expressionList.map((item, index) => {
         return (
